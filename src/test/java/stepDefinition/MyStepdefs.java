@@ -39,7 +39,12 @@ public class MyStepdefs {
 
     @Then("Page title should be {string}")
     public void page_title_should_be(String pagetitle) {
-        Assert.assertEquals(pagetitle, driver.getTitle());
+        if(driver.getPageSource().contains("Login was unsuccessful.")){
+            driver.close();
+            Assert.assertTrue(false);
+        }else {
+            Assert.assertEquals(pagetitle, driver.getTitle());
+        }
     }
 
     @When("User clicks on logout")

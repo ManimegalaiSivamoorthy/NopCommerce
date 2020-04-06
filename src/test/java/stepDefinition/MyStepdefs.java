@@ -1,17 +1,18 @@
 package stepDefinition;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pageObject.AddCustomerPageObject;
 import pageObject.LoginPageObject;
 
-public class MyStepdefs {
-    public WebDriver driver;
-    public LoginPageObject loginPageObject;
+public class MyStepdefs extends Base{
 
     @Given("User launches the chrome browser")
     public void user_launches_the_chrome_browser() throws InterruptedException {
@@ -60,5 +61,60 @@ public class MyStepdefs {
         driver.quit();
     }
 
+    //step definition for add a new customer feature
 
+    @Then("User can view the dashboard")
+    public void userCanViewTheDashboard() {
+        addCustomerPageObject = new AddCustomerPageObject(driver);
+        Assert.assertEquals("Dashboard / nopCommerce administration", driver.getTitle());
+    }
+
+    @When("User click on the customer menu")
+    public void userClickOnTheCustomerMenu() throws InterruptedException {
+        Thread.sleep(300);
+        addCustomerPageObject.clickCustomerMenu();
+    }
+
+    @And("User click on the customer menu item")
+    public void userClickOnTheCustomerMenuItem() throws InterruptedException {
+        Thread.sleep(2000);
+        addCustomerPageObject.clickCustomerMenuItem();
+    }
+
+    @Then("User click on add new button")
+    public void userClickOnAddNewButton() throws InterruptedException {
+        Thread.sleep(2000);
+        addCustomerPageObject.clickAddNewButton();
+    }
+
+    @And("User can view the add new customer page")
+    public void userCanViewTheAddNewCustomerPage() throws InterruptedException {
+        Thread.sleep(3000);
+        Assert.assertEquals("Add a new customer / nopCommerce administration", driver.getTitle());
+    }
+
+    @Then("User should enter the customer details")
+    public void userShouldEnterTheCustomerDetails() throws InterruptedException {
+        String email = randomString() + "@gamil.com";
+        addCustomerPageObject.setTextEmail(email);
+        addCustomerPageObject.setTextPassword("test123");
+        addCustomerPageObject.setFirstName("Pavan");
+        addCustomerPageObject.setLastName("Kumar");
+        addCustomerPageObject.setGender("Male");
+        addCustomerPageObject.setDateOfBirth("09/11/1984");
+        addCustomerPageObject.setCompanyName("TestingAutomation");
+        addCustomerPageObject.setCustomerRoles("Guests");
+        addCustomerPageObject.setDropDownManagerOfVendor("Vendor 2");
+        addCustomerPageObject.setAdminContent("This is Testing....");
+    }
+
+    @When("click on Save button")
+    public void clickOnSaveButton() {
+        addCustomerPageObject.clickSaveButton();
+    }
+
+    @Then("User can view the confirmation message {string}")
+    public void userCanViewTheConfirmationMessage(String message) {
+        Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("The new customer has been added successfully."));
+    }
 }

@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.java.eo.Se;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageObject.AddCustomerPageObject;
 import pageObject.LoginPageObject;
+import pageObject.SearchCustomerByemail;
 
 public class MyStepdefs extends Base{
 
@@ -24,6 +26,7 @@ public class MyStepdefs extends Base{
     @When("User opens the Url {string}")
     public void user_opens_the_Url(String url) {
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
     @When("User enters email as {string} and password as {string}")
@@ -116,5 +119,44 @@ public class MyStepdefs extends Base{
     @Then("User can view the confirmation message {string}")
     public void userCanViewTheConfirmationMessage(String message) {
         Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("The new customer has been added successfully."));
+    }
+
+    //Search customer using email id
+
+    @And("User can view the {string} page")
+    public void userCanViewThePage(String pageTitle) {
+        Assert.assertEquals("Customers / nopCommerce administration", driver.getTitle());
+    }
+
+    @When("User enters email id")
+    public void userEntersEmailId() {
+        searchCustomerByemail = new SearchCustomerByemail(driver);
+        searchCustomerByemail.setSearchEmailId("victoria_victoria@nopCommerce.com");
+    }
+
+    @And("Click on search")
+    public void clickOnSearch() {
+        searchCustomerByemail.clickSearchButton();
+    }
+
+    @Then("User should find the email id in the search table")
+    public void userShouldFindTheEmailIdInTheSearchTable() {
+       Boolean status = searchCustomerByemail.searchCustomerByid("victoria_victoria@nopCommerce.com");
+       Assert.assertTrue(status);
+    }
+
+    //search customer by firstname and lastname
+
+    @When("User enters firstname and lastname")
+    public void userEntersFirstnameAndLastname() {
+        searchCustomerByemail = new SearchCustomerByemail(driver);
+        searchCustomerByemail.setSearchFirstName("victoria");
+        searchCustomerByemail.setSearchLastName("Terces");
+    }
+
+    @Then("User should find the firstname and lastname in the search table")
+    public void userShouldFindTheFirstnameAndLastnameInTheSearchTable() {
+        Boolean status = searchCustomerByemail.searchCustomerByName("Victoria", "Terces");
+        Assert.assertEquals(true, status);
     }
 }

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
         (
                 features = ".//features/Customers.feature",
                 glue = "stepDefinition",
+                tags="not @sanity",
                 dryRun = false,
                 monochrome = true,
                 plugin = {"pretty", "html: test-output"}

@@ -5,7 +5,7 @@ formatter.feature({
   "keyword": "Feature"
 });
 formatter.scenario({
-  "name": "Add a new customer",
+  "name": "Search customer by firstname and lastname",
   "description": "",
   "keyword": "Scenario"
 });
@@ -80,51 +80,41 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "User click on add new button",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "MyStepdefs.userClickOnAddNewButton()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "User can view the add new customer page",
+  "name": "User can view the \"Customers / nopCommerce administration\" page",
   "keyword": "And "
 });
 formatter.match({
-  "location": "MyStepdefs.userCanViewTheAddNewCustomerPage()"
+  "location": "MyStepdefs.userCanViewThePage(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "User should enter the customer details",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "MyStepdefs.userShouldEnterTheCustomerDetails()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "click on Save button",
+  "name": "User enters firstname and lastname",
   "keyword": "When "
 });
 formatter.match({
-  "location": "MyStepdefs.clickOnSaveButton()"
+  "location": "MyStepdefs.userEntersFirstnameAndLastname()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "User can view the confirmation message \"The new customer has been added successfully.\"",
+  "name": "Click on search",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyStepdefs.clickOnSearch()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "User should find the firstname and lastname in the search table",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "MyStepdefs.userCanViewTheConfirmationMessage(String)"
+  "location": "MyStepdefs.userShouldFindTheFirstnameAndLastnameInTheSearchTable()"
 });
 formatter.result({
   "status": "passed"

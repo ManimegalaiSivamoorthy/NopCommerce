@@ -1,11 +1,11 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:features/login.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:features/Customers.feature");
 formatter.feature({
-  "name": "Login",
+  "name": "Customer",
   "description": "",
   "keyword": "Feature"
 });
 formatter.scenario({
-  "name": "Successful login with valid credentials",
+  "name": "Search customer by firstname and lastname",
   "description": "",
   "keyword": "Scenario"
 });
@@ -31,7 +31,7 @@ formatter.result({
 });
 formatter.step({
   "name": "User enters email as \"admin@yourstore.com\" and password as \"admin\"",
-  "keyword": "And "
+  "keyword": "Then "
 });
 formatter.match({
   "location": "MyStepdefs.user_enters_email_as_and_password_as(String,String)"
@@ -41,7 +41,7 @@ formatter.result({
 });
 formatter.step({
   "name": "Click on login",
-  "keyword": "Then "
+  "keyword": "And "
 });
 formatter.match({
   "location": "MyStepdefs.click_on_login()"
@@ -50,31 +50,71 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "Page title should be \"Dashboard / nopCommerce administration\"",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "MyStepdefs.page_title_should_be(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "User clicks on logout",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "MyStepdefs.user_clicks_on_logout()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "Page title should be \"Your store. Login\"",
+  "name": "User can view the dashboard",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "MyStepdefs.page_title_should_be(String)"
+  "location": "MyStepdefs.userCanViewTheDashboard()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "User click on the customer menu",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "MyStepdefs.userClickOnTheCustomerMenu()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "User click on the customer menu item",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyStepdefs.userClickOnTheCustomerMenuItem()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "User can view the \"Customers / nopCommerce administration\" page",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyStepdefs.userCanViewThePage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "User enters firstname and lastname",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "MyStepdefs.userEntersFirstnameAndLastname()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "Click on search",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "MyStepdefs.clickOnSearch()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "User should find the firstname and lastname in the search table",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "MyStepdefs.userShouldFindTheFirstnameAndLastnameInTheSearchTable()"
 });
 formatter.result({
   "status": "passed"
